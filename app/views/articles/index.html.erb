@@ -1,0 +1,21 @@
+<h1> Articles Index Page </h1>
+<% @articles.each do |article|%>
+  <label> Article title </label>
+  <%= article.title %><br/>
+  <label> Article body </label>
+  <%= article.body %><br/>
+  <label> Article category </label>
+  <%= article.category_id %><br/>
+  <label> Article published date </label>
+  <%= article.publish_date %><br/>
+  <label> Article is published? </label>
+  <% if article.is_published %>
+    Article is published
+  <% else %>
+    Article is not published
+  <% end %>
+  <br/>
+  <label> Article image url </label>
+  <%= article.feature_image_url %><br/><br/>
+  
+<% end %>

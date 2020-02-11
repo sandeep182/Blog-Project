@@ -1,0 +1,12 @@
+<div align="center">
+<h1> Categories Index Page </h1>
+<% @categories.each do |category|%>
+	<label> Category name</label>
+	<%= category.name %><br/>
+	<label> Category description </label>
+	<%= category.description %><br/>
+<% end %>
+</div>
+
+
+<%= link_to "Add Category", new_category_path %>

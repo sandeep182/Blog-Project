@@ -1,0 +1,30 @@
+<%= form_with model: @article do |item| %>
+  
+    <label> Enter article title </label>
+    <%= item.text_field :title %><br/>
+     </br>
+  
+    <label> Enter article description </label>
+    <%= item.text_field :body %><br/>
+    </br>
+  
+    <label> Enter category article belongs to  </label>
+    <%= item.collection_select :category_id, Category.all, :id, :name, prompt: "Select the Category" %><br/>
+    </br>
+  
+    <label> Publish date:  </label>
+    <%= item.date_field :publish_date, order: [:day, :month, :year] %><br/>
+    </br>
+  
+    <label> Enter the image URL </label>
+    <%= item.file_field :feature_image_url %><br/>
+    </br>
+  
+    <label> Published date </label>
+    <%= item.check_box :is_published, checked: "checked" %><br/>
+    </br>
+  
+    <%= item.submit %>
+    </br>
+  
+  <% end %>
