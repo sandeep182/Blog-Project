@@ -1,12 +1,8 @@
-<div align="center">
 <h1> Categories Index Page </h1>
-<% @categories.each do |category|%>
+<% @categories.each_with_index do |category,index|%>
 	<label> Category name</label>
-	<%= category.name %><br/>
-	<label> Category description </label>
-	<%= category.description %><br/>
+	<%= link_to category.name, category_path(category.id) %>(<%= category.articles.count %> articles)<br/>
 <% end %>
 </div>
-
 
 <%= link_to "Add Category", new_category_path %>
