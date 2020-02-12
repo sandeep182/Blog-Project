@@ -1,0 +1,13 @@
+<h1> Show </h1>
+<b> Title: </b> <%= @article.title %> <br/>
+<b> Body: </b> <%= @article.text %><br/>
+<b> Publish date: </b> <%= @article.publish_date %><br/>
+<b> Image URL: </b> <%= @article.feature_image_url %><br/>
+<b> Is Published: </b> 
+  <% if @article.is_published %>
+    It is published
+  <% else %>
+    It is not published
+
+  <% end %><br/>
+  <%= link_to "Delete", show_article_path(@article.id) , method: :delete, data: { confirm: "sure?" } %><br/>

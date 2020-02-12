@@ -1,5 +1,11 @@
 <p><%= @category.name %></p>
 <p><%= @category.description %> </p>
+<% @category.articles.each do |article| %>  	 
+    <label>Title :</label><%= article.title %><br/>
+    <label>Body :</label><%= article.text %><br/>
+    <label>Posted on</label> <%= article.publish_date.strftime("%B %d %Y") %><br/><br/>
+    <%= link_to 'Read Article', show_article_path(article.id)%><br/>
+  <% end %>
 <p>
  <%= link_to "edit", edit_category_path(@category.id) %>
  <%= link_to "delete", category_path(@category.id), method: :delete, data: {confirm: "Are you Sure ?"} %>
