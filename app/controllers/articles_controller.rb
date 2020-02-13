@@ -29,7 +29,7 @@ class ArticlesController < ApplicationController
           flash[:notice] = "Page created successfully....."
           redirect_to articles_path
         else
-        end  
+        end 
      end
     
       def update

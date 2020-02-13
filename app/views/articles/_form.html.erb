@@ -1,10 +1,11 @@
 <%= form_with model: @article do |n| %>
   
+  
     <label> Enter your article title </label>
     <%= n.text_field :title %><br/>
   
     <label> Say something about your article </label>
-    <%= n.text_field :body %><br/>
+    <%= n.text_field :text %><br/>
   
     <label> Which category this articles belongs to:  </label>
     <%= n.collection_select :category_id, Category.all, :id, :name, prompt: "Select Category" %><br/>
@@ -15,6 +16,6 @@
     <label> Enter your URL </label>
     <%= n.file_field :feature_image_url %><br/>
     
-    <%= n.submit %>
+    <%= n.submit %> s
   
   <% end %>
