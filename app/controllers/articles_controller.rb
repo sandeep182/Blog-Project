@@ -11,8 +11,6 @@ class ArticlesController < ApplicationController
         @article = Article.find(params[:id])
       end
       
-
-      
       def edit
         @article = Article.find(params[:id])
       end
@@ -56,8 +54,12 @@ class ArticlesController < ApplicationController
             redirect_to categories_path
           end
       end
+      
       def set_param
         params.require(:article).permit(:title, :body, :category_id, :publish_date, :feature_image_url, :is_published) 
-      end   
-    
+      end
+      
+      def set_article
+       @article = Article.friendly.find(params[:id])
+      end 
 end

@@ -1,4 +1,6 @@
 class Article < ApplicationRecord
+    extend FriendlyId
+    friendly_id :title , use: :slugged
     belongs_to :category
     validates_presence_of :title, :body
     validates_uniqueness_of :title

@@ -1,8 +1,6 @@
 <h1>Index Page </h1>
 <% @articles.each do |article|%>
     <b> Category: <%= Category.find(article.category_id).name %> </b> <br/>
-    <%= image_tag(article.feature_image_url.url, size: "100x50") if article.feature_image_url %><br/>
-    <b> Article Title </b>
     <%= article.title %>
     <b> Article Description </b>
     <%= article.text %>
