@@ -1,8 +1,22 @@
 <h1> Categories Index Page </h1>
-<% @categories.each_with_index do |category,index|%>
-	<label> Category name</label>
-	<%= link_to category.name, category_path(category.id) %>(<%= category.articles.count %> articles)<br/>
-<% end %>
-</div>
 
-<%= link_to "Add Category", new_category_path %>
+<% @categories.each_with_index do |category,index| %>
+  <%= index+1 %>) 
+  <b> Name: </b> <%= category.name %> 
+  <b> Description: </b> <%= category.description %> 
+  <b> Number of articles: </b> <%= category.articles.count %>
+  <b>ID: </b> <%= category.id %> <br/>
+
+  <%= link_to "Article to this categories", category_path(category)%>
+
+  <% if can? :manage, @category %>
+    <%= link_to 'Delete', category , method: :delete, data: { confirm: 'sure?' } %>
+    <%= link_to 'Edit', edit_category_path(category) %>  
+  <% end %><br/>
+
+<% end %>
+
+<% if can? :manage, @category %>
+  <%#= link_to 'Delete', category , method: :delete, data: { confirm: 'sure?' } %>
+  <%= link_to 'Add Category', new_category_path %><br/>
+<% end %>

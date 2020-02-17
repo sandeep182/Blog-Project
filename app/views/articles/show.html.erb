@@ -1,13 +1,39 @@
-<h1> Show </h1>
+<h1> Show Articles </h1>
+<b> Category: </b>  <%= link_to Category.find_by('id', @article.category_id).name, category_path(@article.category_id) %><br/>
+<%= image_tag(@article.feature_image_url.url, style: 'height:250px;max-width 200px;width:100%;') if @article.feature_image_url %><br/>
 <b> Title: </b> <%= @article.title %> <br/>
-<b> Body: </b> <%= @article.text %><br/>
+<b> Text: </b> <%= @article.text %><br/>
 <b> Publish date: </b> <%= @article.publish_date %><br/>
-<b> Image URL: </b> <%= @article.feature_image_url %><br/>
 <b> Is Published: </b> 
   <% if @article.is_published %>
     It is published
   <% else %>
     It is not published
-
   <% end %><br/>
-  <%= link_to "Delete", show_article_path(@article.id) , method: :delete, data: { confirm: "sure?" } %><br/>
+  <% if user_signed_in? and (can? :manage, @article or current_user.id == @article.user_id) %>
+    <%= link_to "edit", article_edit_path(@article.id) %>
+    <%= link_to "Delete", @article , method: :delete, data: { confirm: "sure?" } %><br/><br/> <br/>
+  <% end %>
+
+
+  var formHandle = document.getElementById('articleForm');
+  var submitHandle = document.getElementById('articleSubmit');
+
+  var titleErrorHandle = document.getElementById('titleError');
+  var textErrorHandle = document.getElementById('textError');
+
+  formHandle.addEventListener('submit',function(e){
+    if (title.value === "") {
+      titleErrorHandle.innerHTML = "Title field cannot be empty";
+      e.preventDefault();
+    }else{
+      titleErrorHandle.innerHTML = "";
+    }
+
+    setTimeout(function(){
+        submitHandle.disabled = false;
+      },100);
+
+  },true);
+
+</script>

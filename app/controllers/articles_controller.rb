@@ -1,5 +1,8 @@
 class ArticlesController < ApplicationController
-    def index
+  load_and_authorize_resource
+    
+      def index
+        @user = current_user 
         @articles = Article.all  
       end
       
@@ -8,7 +11,7 @@ class ArticlesController < ApplicationController
       end
      
       def show
-        @article = Article.find(params[:id])
+        @article = Article.friendly.find(params[:id])
       end
       
       def edit
@@ -54,6 +57,8 @@ class ArticlesController < ApplicationController
             redirect_to categories_path
           end
       end
+
+      private 
       
       def set_param
         params.require(:article).permit(:title, :body, :category_id, :publish_date, :feature_image_url, :is_published) 

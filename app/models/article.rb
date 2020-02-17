@@ -1,9 +1,17 @@
 class Article < ApplicationRecord
-    extend FriendlyId
-    friendly_id :title , use: :slugged
+    # extend FriendlyId
+    # friendly_id :title, use: :slugged
+    validates_presence_of :title,:body,:category_id,:publish_date,:feature_image_url
+    
+    validate :article_published?
     belongs_to :category
-    validates_presence_of :title, :body
-    validates_uniqueness_of :title
-    validates_length_of :title, :minimum => 50
-    validates_length_of  :body, :maximum => 1000
-end
+    belongs_to :user
+    has_many :postcomments, dependent: :destroy
+  
+    def article_published?
+      if publish_date > 1.month.from_now
+        errors.add(:publish_date,"date greater than a month")
+      end
+    end
+  
+  end

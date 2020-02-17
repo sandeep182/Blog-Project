@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Postcomments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th>Article</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @postcomments.each do |postcomment| %>
+      <tr>
+        <td><%= postcomment.title %></td>
+        <td><%= postcomment.body %></td>
+        <td><%= postcomment.article_id %></td>
+        <td><%= postcomment.user_id %></td>
+        <td><%= link_to 'Show', postcomment %></td>
+        <td><%= link_to 'Edit', edit_postcomment_path(postcomment) %></td>
+        <td><%= link_to 'Destroy', postcomment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Postcomment', new_postcomment_path %>

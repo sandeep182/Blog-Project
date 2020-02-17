@@ -1,20 +1,24 @@
-<h1>Index Page </h1>
-<% @articles.each do |article|%>
-    <b> Category: <%= Category.find(article.category_id).name %> </b> <br/>
-    <%= article.title %>
-    <b> Article Description </b>
-    <%= article.text %>
-    <b> Article Publish Date </b>
-    <%= article.publish_date %>
-    <b> Article Image url </b>
-    <%= article.feature_image_url %>
-    <b> Article Created At </b>
-    <%= article.created_at %><br/>
-    <b> Article Updated at </b>
-    <%= article.updated_at %><br/>
-    <%= link_to "Edit Article", edit_article_path(article.id) %>
-    <%= link_to "Show Article", show_article_path(article.id) %>
-    <% end %>   
+<h1> Blog Index Page </h1>
+<% if (user_signed_in?) %>
+<% @articles.each_with_index do |article,index| %>
+  <label> Article title: </label>
+  <%= article.title %>-- <%= Category.find(article.category_id).name %> </b> <br/>
+  <label> Article body:</label>
+  <%= article.text %><br/>
+  <label> Article published date :</label>
+  <%= article.publish_date %><br/>
+  <label> Article is published?: </label>
+  <% if article.is_published %>
+    Article is published
+  <% else %>
+    Article is not published
+  <% end %>
+  <br/>
+  <label> Image</label>
 
-<%= link_to "Add Article", new_article_path %>
-
+  
+  <% end %>
+<%= link_to "Add Articles", new_article_path %>
+<% else %>
+<label>Register First! </label>
+<% end %>
